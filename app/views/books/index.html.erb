@@ -1,0 +1,48 @@
+
+<% if @book.errors.any? %>
+	    <div id="error_explanation" class= "clearfix">
+	      <h3><%= @book.errors.count %> errors prohibited this obj from being saved:</h3>
+	      <ul>
+	      <% @book.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+    <% end %>
+
+
+<div class="row">
+
+    <%= render 'books/sidemenu', user: current_user, book: @book %>
+
+	<div class="col-md-4">
+			<h2>Books</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Title</th>
+						<th>Opinion</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @books.each do |book| %>
+						<tr>
+							<th>
+				<%= attachment_image_tag book.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %>
+							</th>
+							<th>
+			<%= link_to book.title, book_path(book.id) %>
+							</th>
+							<th>
+								<%= book.body %>
+							</th>
+					    </tr>
+					</tbody>
+					<% end %>
+			</table>
+		</div>
+	</div>
+</div>
+

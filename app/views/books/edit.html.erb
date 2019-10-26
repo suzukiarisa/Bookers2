@@ -1,0 +1,33 @@
+<div class="content">
+
+<h2>Editing Book</h2>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @book.errors.count %> errors prohibited this obj from being saved:</h2>
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= form_for(@book) do |f| %>
+
+    <h5>Title</h5>
+    <%= f.text_field :title %>
+
+    <h5>Opinion</h5>
+    <%= f.text_area :body %>
+
+    <div><%= f.submit 'Update Book' %></div>
+    <% end %>
+
+ <%= link_to "Show", book_path(@book) %>
+<%= link_to "Back", books_path %>
+</div>
